@@ -83,6 +83,7 @@ CONFIG_SCHEMA = (
     )
     .extend(cv.COMPONENT_SCHEMA)
     .extend(uart.UART_DEVICE_SCHEMA)
+    .extend(cv.polling_component_schema("10s"))
 )
 
 async def to_code(config):
