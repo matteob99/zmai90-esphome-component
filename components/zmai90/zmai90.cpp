@@ -52,6 +52,7 @@ namespace esphome {
                 cs += resp_data.at(i);
             cs = !cs;
             cs += 0x33;
+            ESP_LOGD("zmai90", "calc: %20x, found: %20x, found2: %20x", cs, resp_data.at(i), *resp_data.end());
             if (cs != resp_data.at(i))
                 return;
             
