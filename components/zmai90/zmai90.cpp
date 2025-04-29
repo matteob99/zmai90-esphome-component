@@ -27,17 +27,22 @@ namespace esphome {
             //while (available()) read(); // clean up uart buffer
             //resp_data.fill(0); // clean up response buffer
             //write_array(req_command); // write command
+            ESP_LOGD("zmai90", "called upd");
         }
 
         void zmai_90::loop() {
             if (available() < EXPECTED_RESP_LEN)
                 return;
 
+            ESP_LOGD("zmai90", "36 avb");
+
             read_array(resp_data.data(), 3);
             if (resp_data[0] != 0xFE || resp_data[1] != 0x01 || resp_data[2] != 0x08) {
                 memset(resp_data.data(), 0, 3);
                 return;
             }
+
+            ESP_LOGD("zmai90", "36 passed first check");
             
             read_array(resp_data.data() + 3, EXPECTED_RESP_LEN - 3);
             
@@ -51,6 +56,7 @@ namespace esphome {
                 return;
             
             
+                ESP_LOGD("zmai90", "36 passed second check");
             // recv data:
             // Byte 0: head byte, must be 0xFE
             // Byte 1: conntrol byte,   
