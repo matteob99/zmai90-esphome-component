@@ -31,9 +31,9 @@ namespace esphome {
             req_command = {0xfe, 0x01, 0x0f, 0x08, 0x00, 0x00, 0x00, 0x1c};
         }
         void zmai_90::update() {
-            //while (available()) read(); // clean up uart buffer
-            //resp_data.fill(0); // clean up response buffer
-            //write_array(req_command); // write command
+            while (available()) read(); // clean up uart buffer
+            resp_data.fill(0); // clean up response buffer
+            write_array(req_command); // write command
             ESP_LOGD("zmai90", "called upd");
         }
 
