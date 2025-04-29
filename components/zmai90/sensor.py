@@ -6,6 +6,7 @@ from esphome.const import (
     UNIT_WATT,
     UNIT_VOLT,
     UNIT_AMPERE,
+    UNIT_PERCENT,
     UNIT_HERTZ,
     UNIT_WATT_HOURS,
     ICON_FLASH,
@@ -20,6 +21,7 @@ from esphome.const import (
     DEVICE_CLASS_REACTIVE_POWER,
     DEVICE_CLASS_APPARENT_POWER,
     STATE_CLASS_TOTAL_INCREASING
+
 )
 
 zmai_90_ns = cg.esphome_ns.namespace("zmai_90")
@@ -68,9 +70,10 @@ CONFIG_SCHEMA = (
                 device_class=DEVICE_CLASS_APPARENT_POWER,
             ),
             cv.Optional("power_factor"): sensor.sensor_schema(
+                unit_of_measurement=UNIT_PERCENT,
                 accuracy_decimals=1,
                 icon=ICON_GAUGE,
-                device_class=DEVICE_CLASS_POWER_FACTOR,
+                device_class=DEVICE_CLASS_POWER_FACTOR
             ),
             cv.Optional("consumed_energy"): sensor.sensor_schema(
                 unit_of_measurement=UNIT_WATT_HOURS,
