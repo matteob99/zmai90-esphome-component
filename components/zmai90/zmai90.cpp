@@ -1,15 +1,20 @@
 #include "esphome.h"
 
+static inline uint8_t hexCodedToNumber(uint8_t raw_data) {
+    return ((raw_data & 0b11110000) * 10) + (raw_data & 0b00001111);
+}
+
 namespace esphome {
     namespace zmai_90 {
 
         float zmai_90::extractFloatData(int position, float divider, size_t data_size) {
             if (position + data_size > resp_data.size())
                 return 0;
-            int data;
-            memcpy(&data, resp_data.data() + position, data_size);
-            //data = htons_l(data);
-            //data = byteswap(data);
+            int data = 0;
+            for (int i = data_size - 1; i >= 0; i--) {
+                data *= 100;
+                data += hexCodedToNumber(resp_data.at(position + i));
+            }
             return data / divider;
         }
 
