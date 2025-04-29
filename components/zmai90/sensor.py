@@ -8,7 +8,7 @@ from esphome.const import (
     UNIT_AMPERE,
     UNIT_PERCENT,
     UNIT_HERTZ,
-    UNIT_WATT_HOURS,
+    UNIT_KILOWATT_HOURS,
     ICON_FLASH,
     ICON_CURRENT_AC,
     ICON_POWER,
@@ -76,7 +76,7 @@ CONFIG_SCHEMA = (
                 device_class=DEVICE_CLASS_POWER_FACTOR
             ),
             cv.Optional("consumed_energy"): sensor.sensor_schema(
-                unit_of_measurement=UNIT_WATT_HOURS,
+                unit_of_measurement=UNIT_KILOWATT_HOURS,
                 icon=ICON_FLASH,
                 accuracy_decimals=2,
                 device_class=DEVICE_CLASS_ENERGY,
