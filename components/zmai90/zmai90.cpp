@@ -8,6 +8,8 @@ namespace esphome {
                 return 0;
             int data;
             memcpy(&data, resp_data.data() + position, data_size);
+            //data = htons_l(data);
+            data = byteswap(data);
             return data / divider;
         }
 
