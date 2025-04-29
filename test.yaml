@@ -16,11 +16,12 @@ uart:
   baud_rate: 9600
   data_bits: 8
   parity: EVEN
-  stop_bits: 1
+  stop_bits: 1 
   id: uart_bus
 
 sensor:
   - platform: zmai90
+    interval: 10s
     voltage:
       name: "Voltage"
     current:
@@ -40,7 +41,7 @@ sensor:
 
 
 #send request for data
-interval:
-  - interval: 10s
-    then:
-      - uart.write: [0xfe, 0x01, 0x0f, 0x08, 0x00, 0x00, 0x00, 0x1c]
+#interval:
+#  - interval: 10s
+#    then:
+#      - uart.write: [0xfe, 0x01, 0x0f, 0x08, 0x00, 0x00, 0x00, 0x1c]

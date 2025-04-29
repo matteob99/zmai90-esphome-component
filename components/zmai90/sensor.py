@@ -18,7 +18,8 @@ from esphome.const import (
     DEVICE_CLASS_FREQUENCY,
     DEVICE_CLASS_POWER_FACTOR,
     DEVICE_CLASS_REACTIVE_POWER,
-    DEVICE_CLASS_APPARENT_POWER
+    DEVICE_CLASS_APPARENT_POWER,
+    STATE_CLASS_TOTAL_INCREASING
 )
 
 zmai_90_ns = cg.esphome_ns.namespace("zmai_90")
@@ -76,6 +77,7 @@ CONFIG_SCHEMA = (
                 icon=ICON_FLASH,
                 accuracy_decimals=2,
                 device_class=DEVICE_CLASS_ENERGY,
+                state_class=STATE_CLASS_TOTAL_INCREASING
             ),
         }
     )
