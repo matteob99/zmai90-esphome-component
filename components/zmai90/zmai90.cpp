@@ -1,7 +1,7 @@
 #include "esphome.h"
 
 static inline uint8_t hexCodedToNumber(uint8_t raw_data) {
-    return ((raw_data & 0b11110000) * 10) + (raw_data & 0b00001111);
+    return (((raw_data & 0b11110000) >> 4) * 10) + (raw_data & 0b00001111);
 }
 
 namespace esphome {
