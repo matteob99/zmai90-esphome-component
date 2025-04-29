@@ -26,17 +26,34 @@ namespace esphome {
         void zmai_90::update() {
             while (available()) read(); // clean up uart buffer
             resp_data.fill(0); // clean up response buffer
-            write_array(req_command.data(), req_command.size()); // write command
+            write_array(req_command); // write command
         }
 
         void zmai_90::loop() {
             if (available() < EXPECTED_RESP_LEN)
                 return;
 
-            read_array(resp_data.data(), EXPECTED_RESP_LEN);
+            read_array(resp_data.data(), 3);
+            if (resp_data[0] != 0xFE || resp_data[1] != 0x01 || resp_data[2] != 0x08) {
+                memset(resp_data.data(), 0, 3);
+                return;
+            }
+            
+            read_array(resp_data.data() + 3, EXPECTED_RESP_LEN - 3);
+            
+            int i = 0;
+            uint8_t cs = 0;
+            for (i = 0; i < resp_data.size() - 1; i++)
+                cs += resp_data.at(i);
+            cs = !cs;
+            cs += 0x33;
+            if (cs != resp_data.at(i))
+                return;
+            
+            
             // recv data:
             // Byte 0: head byte, must be 0xFE
-            // Byte 1: 
+            // Byte 1: conntrol byte,   
 
             if (this->voltage_sensor_)
                 this->voltage_sensor_->publish_state(extractFloatData(3, 10.0));
