@@ -1,5 +1,7 @@
 #include "esphome.h"
 
+#define CS_SUMMED_VAL   0x33
+
 static inline uint8_t hexCodedToNumber(uint8_t raw_data) {
     return (((raw_data & 0b11110000) >> 4) * 10) + (raw_data & 0b00001111);
 }
@@ -34,14 +36,14 @@ namespace esphome {
             while (available()) read(); // clean up uart buffer
             resp_data.fill(0); // clean up response buffer
             write_array(req_command); // write command
-            ESP_LOGD("zmai90", "called upd");
+            // ESP_LOGD("zmai90", "called upd");
         }
 
         void zmai_90::loop() {
             if (available() < EXPECTED_RESP_LEN)
                 return;
 
-            ESP_LOGD("zmai90", "36 avb");
+            // ESP_LOGD("zmai90", "36 avb");
 
             read_array(resp_data.data(), 3);
             if (resp_data[0] != 0xFE || resp_data[1] != 0x01 || resp_data[2] != 0x08) {
@@ -49,7 +51,7 @@ namespace esphome {
                 return;
             }
 
-            ESP_LOGD("zmai90", "36 passed first check");
+            // ESP_LOGD("zmai90", "36 passed first check");
             
             read_array(resp_data.data() + 3, EXPECTED_RESP_LEN - 3);
             
@@ -58,13 +60,13 @@ namespace esphome {
             for (i = 0; i < resp_data.size() - 1; i++)
                 cs += resp_data.at(i);
             cs = ~cs;
-            cs += 0x33;
-            ESP_LOGD("zmai90", "calc: 0x%02x, found: 0x%02x", cs, resp_data.at(i));
+            cs += CS_SUMMED_VAL;
+            // ESP_LOGD("zmai90", "calc: 0x%02x, found: 0x%02x", cs, resp_data.at(i));
             if (cs != resp_data.at(i))
                 return;
             
             
-                ESP_LOGD("zmai90", "36 passed second check");
+            // ESP_LOGD("zmai90", "36 passed second check");
             // recv data:
             // Byte 0: head byte, must be 0xFE
             // Byte 1: conntrol byte,   
