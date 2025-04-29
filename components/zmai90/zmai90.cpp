@@ -50,9 +50,9 @@ namespace esphome {
             uint8_t cs = 0;
             for (i = 0; i < resp_data.size() - 1; i++)
                 cs += resp_data.at(i);
-            cs = !cs;
+            cs = ~cs;
             cs += 0x33;
-            ESP_LOGD("zmai90", "calc: %20x, found: %20x, found2: %20x", cs, resp_data.at(i), *resp_data.end());
+            ESP_LOGD("zmai90", "calc: 0x%02x, found: 0x%02x", cs, resp_data.at(i));
             if (cs != resp_data.at(i))
                 return;
             
