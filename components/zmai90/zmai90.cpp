@@ -64,22 +64,22 @@ namespace esphome {
             // Byte 0: head byte, must be 0xFE
             // Byte 1: conntrol byte,   
 
-            if (this->voltage_sensor_)
-                this->voltage_sensor_->publish_state(extractFloatData(3, 10.0));
-            if (this->current_sensor_)
-                this->current_sensor_->publish_state(extractFloatData(7, 10000.0));
-            if (this->frequency_sensor_)
-                this->frequency_sensor_->publish_state(extractFloatData(11, 100.0));
-            if (this->active_power_sensor_)
-                this->active_power_sensor_->publish_state(extractFloatData(15, 100.0));
-            if (this->reactive_power_sensor_)
-                this->reactive_power_sensor_->publish_state(extractFloatData(19, 100.0));
-            if (this->apparent_power_sensor_)
-                this->apparent_power_sensor_->publish_state(extractFloatData(23, 100.0));
-            if (this->power_factor_sensor_)
-                this->power_factor_sensor_->publish_state(extractFloatData(27, 10.0));
             if (this->consumed_energy_sensor_)
-                this->consumed_energy_sensor_->publish_state(extractFloatData(31, 100.0));
+                this->consumed_energy_sensor_->publish_state(extractFloatData(3, 10.0));
+            if (this->voltage_sensor_)
+                this->voltage_sensor_->publish_state(extractFloatData(7, 10000.0));
+            if (this->current_sensor_)
+                this->current_sensor_->publish_state(extractFloatData(11, 100.0));
+            if (this->frequency_sensor_)
+                this->frequency_sensor_->publish_state(extractFloatData(15, 100.0));
+            if (this->active_power_sensor_)
+                this->active_power_sensor_->publish_state(extractFloatData(19, 100.0));
+            if (this->reactive_power_sensor_)
+                this->reactive_power_sensor_->publish_state(extractFloatData(23, 100.0));
+            if (this->apparent_power_sensor_)
+                this->apparent_power_sensor_->publish_state(extractFloatData(27, 10.0));
+            if (this->power_factor_sensor_)
+                this->power_factor_sensor_->publish_state(extractFloatData(31, 100.0));
         }
     }
 }
