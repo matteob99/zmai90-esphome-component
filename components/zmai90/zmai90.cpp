@@ -65,11 +65,11 @@ namespace esphome {
             // Byte 1: conntrol byte,   
 
             if (this->consumed_energy_sensor_)
-                this->consumed_energy_sensor_->publish_state(extractFloatData(3, 10.0));
+                this->consumed_energy_sensor_->publish_state(extractFloatData(3, 100.0));
             if (this->voltage_sensor_)
-                this->voltage_sensor_->publish_state(extractFloatData(7, 10000.0));
+                this->voltage_sensor_->publish_state(extractFloatData(7, 10.0));
             if (this->current_sensor_)
-                this->current_sensor_->publish_state(extractFloatData(11, 100.0));
+                this->current_sensor_->publish_state(extractFloatData(11, 10000.0));
             if (this->frequency_sensor_)
                 this->frequency_sensor_->publish_state(extractFloatData(15, 100.0));
             if (this->active_power_sensor_)
@@ -77,9 +77,9 @@ namespace esphome {
             if (this->reactive_power_sensor_)
                 this->reactive_power_sensor_->publish_state(extractFloatData(23, 100.0));
             if (this->apparent_power_sensor_)
-                this->apparent_power_sensor_->publish_state(extractFloatData(27, 10.0));
+                this->apparent_power_sensor_->publish_state(extractFloatData(27, 100.0));
             if (this->power_factor_sensor_)
-                this->power_factor_sensor_->publish_state(extractFloatData(31, 100.0));
+                this->power_factor_sensor_->publish_state(extractFloatData(31, 10.0));
         }
     }
 }
